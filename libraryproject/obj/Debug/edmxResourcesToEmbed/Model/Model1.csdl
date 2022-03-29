@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="libraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookWriter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Abstract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SubjectID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK_Book_Subject" FromRole="Book" ToRole="Subject" />
+    <NavigationProperty Name="FormBorrows" Relationship="Self.FK_FormBorrow_Book" FromRole="Book" ToRole="FormBorrow" />
+  </EntityType>
+  <EntityType Name="FormBorrow">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BorrowDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumDay" Type="Int32" Nullable="false" />
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <Property Name="BookID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_FormBorrow_Book" FromRole="FormBorrow" ToRole="Book" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_FormBorrow_Member" FromRole="FormBorrow" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Major">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MajorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Member_Major" FromRole="Major" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NationalCode" Type="Int64" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="Boolean" Nullable="false" />
+    <Property Name="Tel" Type="Int64" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mobile" Type="Int64" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProofID" Type="Int32" Nullable="false" />
+    <Property Name="MajorID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FormBorrows" Relationship="Self.FK_FormBorrow_Member" FromRole="Member" ToRole="FormBorrow" />
+    <NavigationProperty Name="Major" Relationship="Self.FK_Member_Major" FromRole="Member" ToRole="Major" />
+    <NavigationProperty Name="Proof" Relationship="Self.FK_Member_Proof" FromRole="Member" ToRole="Proof" />
+    <NavigationProperty Name="Pic" Relationship="Self.FK_Pic_Member" FromRole="Member" ToRole="Pic" />
+  </EntityType>
+  <EntityType Name="Pic">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Pic_Member" FromRole="Pic" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Proof">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProofName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_Member_Proof" FromRole="Proof" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_Book_Subject" FromRole="Subject" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tel" Type="Int64" Nullable="false" />
+    <Property Name="Mobile" Type="Int64" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Roles" Relationship="libraryModel.UserRole" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_Book_Subject">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FormBorrow_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="FormBorrow" Type="Self.FormBorrow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FormBorrow">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FormBorrow_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="FormBorrow" Type="Self.FormBorrow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FormBorrow">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_Major">
+    <End Role="Major" Type="Self.Major" Multiplicity="1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Major">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="MajorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_Proof">
+    <End Role="Proof" Type="Self.Proof" Multiplicity="1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proof">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="ProofID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pic_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Pic" Type="Self.Pic" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Pic">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="libraryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="FormBorrows" EntityType="Self.FormBorrow" />
+    <EntitySet Name="Majors" EntityType="Self.Major" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="Pics" EntityType="Self.Pic" />
+    <EntitySet Name="Proofs" EntityType="Self.Proof" />
+    <EntitySet Name="Subjects" EntityType="Self.Subject" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Book_Subject" Association="Self.FK_Book_Subject">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FormBorrow_Book" Association="Self.FK_FormBorrow_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="FormBorrow" EntitySet="FormBorrows" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FormBorrow_Member" Association="Self.FK_FormBorrow_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="FormBorrow" EntitySet="FormBorrows" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_Major" Association="Self.FK_Member_Major">
+      <End Role="Major" EntitySet="Majors" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_Proof" Association="Self.FK_Member_Proof">
+      <End Role="Proof" EntitySet="Proofs" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pic_Member" Association="Self.FK_Pic_Member">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="Pic" EntitySet="Pics" />
+    </AssociationSet>
+    <EntitySet Name="Roles" EntityType="libraryModel.Role" />
+    <AssociationSet Name="UserRole" Association="libraryModel.UserRole">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="libraryModel.UserRole" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <Association Name="UserRole">
+    <End Type="libraryModel.Role" Role="Role" Multiplicity="*" />
+    <End Type="libraryModel.User" Role="User" Multiplicity="*" />
+  </Association>
+</Schema>

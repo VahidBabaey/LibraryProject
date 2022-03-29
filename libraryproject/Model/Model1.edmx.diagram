@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ac305fc778b457a975b35907c0d7aee" Name="Diagram1">
+        <EntityTypeShape EntityType="libraryModel.Book" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.FormBorrow" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Major" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Member" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Pic" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Proof" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.Subject" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraryModel.User" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="libraryModel.FK_Book_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_FormBorrow_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_FormBorrow_Member" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Member_Major" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Member_Proof" ManuallyRouted="false" />
+        <AssociationConnector Association="libraryModel.FK_Pic_Member" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="libraryModel.Role" Width="1.5" PointX="11.625" PointY="1" />
+        <AssociationConnector Association="libraryModel.UserRole" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
